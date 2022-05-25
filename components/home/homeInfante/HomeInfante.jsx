@@ -1,20 +1,20 @@
-import { MyChart } from "components/utilidades/chartJS/MyChart"
-import React from "react"
-import Link from "next/link"
-import { useRouter } from "next/router"
+import { MyChart } from "components/utilidades/chartJS/MyChart";
+import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const HomeInfante = (props) => {
-  const router = useRouter()
-  const infanteID = router.query.id
+  const router = useRouter();
+  const infanteID = router.query.id;
 
-  let esMedico
-  const NORMAL = ""
-  const HIDDEN = "d-none"
+  let esMedico;
+  const NORMAL = "";
+  const HIDDEN = "d-none";
 
   if (props.tipo === "medico") {
-    esMedico = true
+    esMedico = true;
   } else if (props.tipo === "acudiente") {
-    esMedico = false
+    esMedico = false;
   }
 
   return (
@@ -35,8 +35,8 @@ const HomeInfante = (props) => {
         </div>
         <div className="row">
           <div className="">
-            <div className="row">
-              <div className="col col-xxl-4 col-lg-12 col-sm-12 col-xs-12 mb-4">
+            <div className="row mb-5">
+              <div className="col col-xxl-6 col-lg-12 col-sm-12 col-xs-12 mb-4">
                 <div className="contendor-imagen-infante mb-3">
                   <img
                     className="imagen-infante"
@@ -45,7 +45,7 @@ const HomeInfante = (props) => {
                   ></img>
                 </div>
               </div>
-              <div className="col col-xxl-8 col-lg-12 col-sm-12 col-xs-12">
+              <div className="col col-xxl-6 col-lg-12 col-sm-12 col-xs-12">
                 <div className="contenedor-datos-infante">
                   <div className="row">
                     <div className="col">
@@ -78,49 +78,51 @@ const HomeInfante = (props) => {
                 </div>
               </div>
             </div>
-            <div className="contenedor-grafica-infante mt-4 mb-4">
-              <MyChart />
+            <div className="row mt-5 me-4 ms-4">
+              <div className="contenedor-grafica-infante col col-xxl-7 col-lg-12 col-sm-12 col-xs-12">
+                <MyChart />
+              </div>
+              <div className="col col-xxl-4 col-lg-12 col-sm-12 col-xs-12">
+                <table className="mt-5 container-tabla table table-hover table-primary table-bordered border-primary">
+                  <caption>Lista de historias clínicas del infante</caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Descarga</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>2022-05-24</td>
+                      <td>
+                        <a href="#">some place no here</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>2022-03-12</td>
+                      <td>
+                        <a href="#">some place no here</a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>2022-01-15</td>
+                      <td>
+                        <a href="#">some place no here</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
-          <div>
-            <table className="mt-3 table table-hover table-primary table-bordered border-primary">
-              <caption>Lista de historias clínicas del infante</caption>
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Fecha</th>
-                  <th scope="col">Descarga</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>2022-05-24</td>
-                  <td>
-                    <a href="#">some place no here</a>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>2022-03-12</td>
-                  <td>
-                    <a href="#">some place no here</a>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>2022-01-15</td>
-                  <td>
-                    <a href="#">some place no here</a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default HomeInfante
+export default HomeInfante;

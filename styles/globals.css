@@ -7,6 +7,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -87,6 +89,8 @@ a {
     border-radius: 1rem;
     height: 23rem;
     width: 23rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -147,8 +151,10 @@ a {
     border-width: 0.2rem;
     border-style: solid;
     border-radius: 1rem;
-    height: 32rem;
-    width: 32rem;
+    height: 25rem;
+    width: 25rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -215,8 +221,10 @@ a {
     border-width: 0.2rem;
     border-style: solid;
     border-radius: 1rem;
-    height: 42rem;
-    width: 42rem;
+    height: 30rem;
+    width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
@@ -503,7 +511,10 @@ a {
   border-style: solid;
   padding: 1.5rem;
   min-height: 13rem;
-  max-height: fit-content;
+  max-width: 65%;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .item-datos-infante {
@@ -516,6 +527,8 @@ a {
   border-color: #84b6f4;
   border-width: 0.2rem;
   border-style: solid;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .colored-toast.swal2-icon-success {
@@ -557,4 +570,10 @@ a {
 
 .icon-swal {
   background-color: white !important;
+}
+
+.container-table {
+  width: 95%;
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
