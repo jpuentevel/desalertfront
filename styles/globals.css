@@ -1,0 +1,560 @@
+html,
+body {
+  color: "#DBF2FF";
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.texto-header-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .texto-header {
+    font-size: 2rem;
+    max-width: 110rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fondo-header-opciones {
+    background: #84b6f4;
+    min-width: 100%;
+    padding: 2rem 2rem 10rem 2rem;
+  }
+
+  .degradado-azul-blanco {
+    background-image: linear-gradient(
+      to bottom,
+      #84b6f4,
+      #95c6f7,
+      #aad5f9,
+      #c1e4fc,
+      #dbf2ff
+    );
+    min-width: 100%;
+    height: 3rem;
+  }
+
+  .card-opcion {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    box-shadow: 20px 20px 60px #baced9, -20px -20px 60px #fcffff;
+    width: 30rem;
+    height: 35rem;
+    padding-top: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .boton-opcion {
+    height: 4rem;
+    width: 15rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #84b6f4;
+    border-width: 0.2rem;
+    border-color: #02121b;
+    font-size: 1rem;
+  }
+
+  .contendor-imagen-infante {
+    border-color: #84b6f4;
+    border-width: 0.2rem;
+    border-style: solid;
+    border-radius: 1rem;
+    height: 23rem;
+    width: 23rem;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .texto-header {
+    font-size: 3rem;
+    max-width: 110rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fondo-header-opciones {
+    background: #84b6f4;
+    min-width: 100%;
+    padding: 2rem 2rem 10rem 2rem;
+  }
+
+  .degradado-azul-blanco {
+    background-image: linear-gradient(
+      to bottom,
+      #84b6f4,
+      #95c6f7,
+      #aad5f9,
+      #c1e4fc,
+      #dbf2ff
+    );
+    min-width: 100%;
+    height: 10rem;
+  }
+
+  .card-opcion {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    box-shadow: 20px 20px 60px #baced9, -20px -20px 60px #fcffff;
+    width: 30rem;
+    height: 37rem;
+    padding-top: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .boton-opcion {
+    height: 4rem;
+    width: 15rem;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #84b6f4;
+    border-width: 0.2rem;
+    border-color: #02121b;
+    font-size: 1.3rem;
+  }
+
+  .contendor-imagen-infante {
+    border-color: #84b6f4;
+    border-width: 0.2rem;
+    border-style: solid;
+    border-radius: 1rem;
+    height: 32rem;
+    width: 32rem;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .texto-header {
+    font-size: 3.5rem;
+    max-width: 70rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fondo-header-opciones {
+    background: #84b6f4;
+    min-width: 100%;
+    padding: 2rem 2rem 10rem 2rem;
+  }
+
+  .degradado-azul-blanco {
+    background-image: linear-gradient(
+      to bottom,
+      #84b6f4,
+      #95c6f7,
+      #aad5f9,
+      #c1e4fc,
+      #dbf2ff
+    );
+    min-width: 100%;
+    height: 7rem;
+  }
+
+  .card-opcion {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    box-shadow: 20px 20px 60px #baced9, -20px -20px 60px #fcffff;
+    width: 30rem;
+    max-height: 37rem;
+    height: auto;
+    padding-top: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .boton-opcion {
+    max-height: 4rem;
+    max-width: 15rem;
+    height: auto;
+    width: auto;
+    min-width: 12rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #84b6f4;
+    border-width: 0.2rem;
+    border-color: #02121b;
+    font-size: 1.2rem;
+  }
+
+  .contendor-imagen-infante {
+    border-color: #84b6f4;
+    border-width: 0.2rem;
+    border-style: solid;
+    border-radius: 1rem;
+    height: 42rem;
+    width: 42rem;
+  }
+}
+
+.opciones {
+  display: flex;
+  justify-content: space-evenly;
+  min-width: 100%;
+  padding-bottom: 5rem;
+}
+
+.opcion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boton-opcion:hover {
+  background-color: #dbf2ff;
+  border-color: #84b6f4;
+}
+
+.texto-opciones {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 0 2rem 0 2rem;
+  margin-bottom: 3rem;
+}
+
+.fondo-opciones {
+  width: 100%;
+  height: 100%;
+  background-color: #dbf2ff;
+}
+
+.fondo-login {
+  min-height: 100vh;
+  min-width: 100%;
+  background-color: #84b6f4;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 4rem;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .area-login {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    width: 25rem;
+    height: 52rem;
+    padding: 3rem;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .label-login-back {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .area-registro-medico {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    width: 25rem;
+    height: 67rem;
+    padding: 3rem;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .label-registro-medico-back {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .area-login {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    width: 30rem;
+    height: 53rem;
+    padding: 3rem;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .label-login-back {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .area-registro-medico {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    width: 33rem;
+    height: 67rem;
+    padding: 3rem;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .label-registro-medico-back {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .area-login {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    width: 40rem;
+    height: 62rem;
+    padding: 3rem;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .label-login-back {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .area-registro-medico {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    width: 35rem;
+    height: 68rem;
+    padding: 3rem;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .label-registro-medico-back {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .area-login {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    width: 55rem;
+    height: 37rem;
+    padding: 3rem;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .label-login-back {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  .area-registro-medico {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    width: 55rem;
+    height: 46rem;
+    padding: 3rem;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .label-registro-medico-back {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .padding-genero {
+    padding-top: 2rem;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .area-login {
+    border-radius: 50px;
+    background-color: #dbf2ff;
+    width: 70rem;
+    height: 40rem;
+    padding: 3rem;
+    margin: 0 2rem 0 2rem;
+  }
+
+  .label-login-back {
+    display: flex;
+    justify-content: center;
+    margin-top: -1.5rem;
+  }
+}
+
+.imagen-login {
+  margin: auto 0 auto 0;
+}
+
+.login-form {
+  margin: auto 0 auto 0;
+}
+
+.container-titulo-login {
+  display: flex;
+  justify-content: center;
+}
+
+.titulo-login {
+  font-size: 2rem;
+}
+
+.boton-login {
+  background-color: #84b6f4;
+  color: #02121b;
+  border-width: 0.1rem;
+  border-color: #02121b;
+  max-width: 18rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.boton-login:hover {
+  background-color: #dbf2ff;
+  color: #02121b;
+  border-width: 0.1rem;
+  border-color: #84b6f4;
+}
+
+.body-home {
+  height: 100%;
+  width: 100vw;
+  background-color: #dbf2ff;
+  padding: 3rem;
+}
+
+.contenedor-infantes {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border-width: 0.2rem;
+  border-color: #84b6f4;
+  border-style: solid;
+  width: auto;
+  margin-top: 2rem;
+}
+
+.card-infante {
+  border-radius: 1rem;
+  margin: 0.8rem;
+  background-color: #dbf2ff;
+  border-width: 0.2rem;
+  border-color: #84b6f4;
+  box-shadow: 20px 20px 60px #baced9, -20px -20px 60px #fcffff;
+  background-color: #dbf2ff;
+}
+
+.card-infante img {
+  width: 100%;
+  height: auto;
+}
+
+.barra-busqueda {
+  max-width: 50rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.imagen-infante {
+  background-size: cover;
+  width: 100% !important;
+  position: relative !important;
+  height: 100% !important;
+  border-radius: 0.7rem;
+}
+
+.contenedor-datos-infante {
+  border-radius: 0.7rem;
+  background: #dbf2ff;
+  border-color: #84b6f4;
+  border-width: 0.2rem;
+  border-style: solid;
+  padding: 1.5rem;
+  min-height: 13rem;
+  max-height: fit-content;
+}
+
+.item-datos-infante {
+  background-color: #dbf2ff;
+  color: darkblue;
+}
+
+.contenedor-grafica-infante {
+  border-radius: 0.7rem;
+  border-color: #84b6f4;
+  border-width: 0.2rem;
+  border-style: solid;
+}
+
+.colored-toast.swal2-icon-success {
+  background-color: #a5dc86 !important;
+}
+
+.colored-toast.swal2-icon-error {
+  background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+  background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+  background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+  background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+  color: white;
+}
+
+.colored-toast .swal2-close {
+  color: white;
+}
+
+.colored-toast .swal2-html-container {
+  color: white;
+}
+
+.texto-swal {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.icon-swal {
+  background-color: white !important;
+}
