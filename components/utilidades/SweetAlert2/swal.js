@@ -35,6 +35,8 @@ function swalIMC(imc, color) {
   } else if (color == "morado") {
     text = "¡Atención! El infante tiene obesidad"
     background = "#5C26D1"
+  } else {
+    background = "#ffffff"
   }
 
   return Swal.fire({

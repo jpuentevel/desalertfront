@@ -1,119 +1,114 @@
-import React, { useState } from "react"
-import {
-  calcularIMC,
-  calcularRango,
-  definirColor,
-} from "components/utilidades/IMC/CalcularIMC"
-import { swalIMC, swalSuccess } from "components/utilidades/SweetAlert2/swal"
+import React, { useState } from "react";
+// import { calculoFinal, calcularIMC } from "components/utilidades/IMC/CalcularIMC";
+import { calcularIMC, calculoFinal } from "../utilidades/IMC/CalculosIMC"
+import { swalSuccess } from "components/utilidades/SweetAlert2/swal";
 
 const FormHistoriaClinica = () => {
   // generales
-  const [altura, setAltura] = useState(0)
-  const [peso, setPeso] = useState(0)
-  const [imc, setImc] = useState(0)
-  const [rango, setRango] = useState("")
-  const [edad, setEdad] = useState(15)
+  const [altura, setAltura] = useState(0);
+  const [peso, setPeso] = useState(0);
+  const [imc, setImc] = useState(0);
+  const [rango, setRango] = useState("");
+  const [edad, setEdad] = useState(15);
   const [color, setColor] = useState()
-  const [calcularIsClicked, setCalcularIsClicked] = useState(false)
 
   // padecimiento actual
-  const [padecimientos, setPadecimientos] = useState("")
-  const [diagnosticoPrevio, setDiagnosticoPrevio] = useState("")
-  const [estudioPrevio, setEstudioPrevio] = useState("")
-  const [terapeutaPrevia, setTerapeutaPrevia] = useState("")
+  const [padecimientos, setPadecimientos] = useState("");
+  const [diagnosticoPrevio, setDiagnosticoPrevio] = useState("");
+  const [estudioPrevio, setEstudioPrevio] = useState("");
+  const [terapeutaPrevia, setTerapeutaPrevia] = useState("");
 
   // alimentacion
-  const [pechoMaterno, setPechoMaterno] = useState(false)
-  const [duracion, setDuracion] = useState(0)
-  const [ablactacion, setAblactacion] = useState(0)
-  const [destete, setDestete] = useState(0)
+  const [pechoMaterno, setPechoMaterno] = useState(false);
+  const [duracion, setDuracion] = useState(0);
+  const [ablactacion, setAblactacion] = useState(0);
+  const [destete, setDestete] = useState(0);
 
   // alimentacion real
-  const [carne, setCarne] = useState(false)
-  const [leche, setLeche] = useState(false)
-  const [frutas, setFrutas] = useState(false)
-  const [cereales, setCereales] = useState(false)
-  const [legumbres, setLegumbres] = useState(false)
+  const [carne, setCarne] = useState(false);
+  const [leche, setLeche] = useState(false);
+  const [frutas, setFrutas] = useState(false);
+  const [cereales, setCereales] = useState(false);
+  const [legumbres, setLegumbres] = useState(false);
 
   // inmunizaciones
-  const [poliomelitis, setPoliomelitis] = useState(false)
-  const [rotavirus, setRotavirus] = useState(false)
-  const [dpto, setDpto] = useState(false)
-  const [influenza, setInfluenza] = useState(false)
-  const [sarampion, setSarampion] = useState(false)
-  const [epatitisB, setEpatitisB] = useState(false)
-  const [rubeola, setRubeola] = useState(false)
-  const [neumococo, setNeumococo] = useState(false)
-  const [parotiditis, setParotiditis] = useState(false)
-  const [bgc, setBgc] = useState(false)
-  const [varicela, setVaricela] = useState(false)
-  const [tixoide, setTixoide] = useState(false)
-  const [hepatitis, setHepatitis] = useState(false)
-  const [A1, setA1] = useState(false)
-  const [papiloma, setPapiloma] = useState(false)
-  const [sueros, setSueros] = useState("")
+  const [poliomelitis, setPoliomelitis] = useState(false);
+  const [rotavirus, setRotavirus] = useState(false);
+  const [dpto, setDpto] = useState(false);
+  const [influenza, setInfluenza] = useState(false);
+  const [sarampion, setSarampion] = useState(false);
+  const [epatitisB, setEpatitisB] = useState(false);
+  const [rubeola, setRubeola] = useState(false);
+  const [neumococo, setNeumococo] = useState(false);
+  const [parotiditis, setParotiditis] = useState(false);
+  const [bgc, setBgc] = useState(false);
+  const [varicela, setVaricela] = useState(false);
+  const [tixoide, setTixoide] = useState(false);
+  const [hepatitis, setHepatitis] = useState(false);
+  const [A1, setA1] = useState(false);
+  const [papiloma, setPapiloma] = useState(false);
+  const [sueros, setSueros] = useState("");
 
   // desarrollo psicomotor
-  const [datosAnormales, setDatosAnormales] = useState("")
-  const [alteracionesLenguaje, setAlteracionesLenguaje] = useState("")
+  const [datosAnormales, setDatosAnormales] = useState("");
+  const [alteracionesLenguaje, setAlteracionesLenguaje] = useState("");
 
   // patologicos
-  const [infecciones, setInfecciones] = useState(false)
-  const [alergicos, setAlergicos] = useState(false)
-  const [traumatismoicos, setTraumatismoicos] = useState(false)
-  const [transfuciones, setTransfuciones] = useState(false)
-  const [quirurgicos, setQuirurgicos] = useState(false)
-  const [hospitalizacion, setHospitalizacion] = useState(false)
+  const [infecciones, setInfecciones] = useState(false);
+  const [alergicos, setAlergicos] = useState(false);
+  const [traumatismoicos, setTraumatismoicos] = useState(false);
+  const [transfuciones, setTransfuciones] = useState(false);
+  const [quirurgicos, setQuirurgicos] = useState(false);
+  const [hospitalizacion, setHospitalizacion] = useState(false);
 
   // exploracion fisica
-  const [perimetroCefalico, setPerimetroCefalico] = useState("")
-  const [perimetroEmbarazo, setPerimetroEmbarazo] = useState("")
-  const [perimetroPierna, setPerimetroPierna] = useState("")
-  const [segmentoSuperior, setSegmentoSuperior] = useState("")
-  const [segmentoInferior, setSegmentoInferior] = useState("")
-  const [tensionArterial, setTensionArterial] = useState("")
-  const [frecuenciaCardiaca, setFrecuenciaCardiaca] = useState("")
-  const [frecuenciaRespiratoria, setFrecuenciaRespiratoria] = useState("")
-  const [temperatura, setTemperatura] = useState("")
+  const [perimetroCefalico, setPerimetroCefalico] = useState("");
+  const [perimetroEmbarazo, setPerimetroEmbarazo] = useState("");
+  const [perimetroPierna, setPerimetroPierna] = useState("");
+  const [segmentoSuperior, setSegmentoSuperior] = useState("");
+  const [segmentoInferior, setSegmentoInferior] = useState("");
+  const [tensionArterial, setTensionArterial] = useState("");
+  const [frecuenciaCardiaca, setFrecuenciaCardiaca] = useState("");
+  const [frecuenciaRespiratoria, setFrecuenciaRespiratoria] = useState("");
+  const [temperatura, setTemperatura] = useState("");
 
   // anormalidades
-  const [piel, setPiel] = useState(false)
-  const [cabeza, setCabeza] = useState(false)
-  const [ojos, setOjos] = useState(false)
-  const [oidos, setOidos] = useState(false)
-  const [nariz, setNariz] = useState(false)
-  const [boca, setBoca] = useState(false)
-  const [cuello, setCuello] = useState(false)
-  const [torax, setTorax] = useState(false)
-  const [areaCardiaca, setAreaCardiaca] = useState(false)
-  const [pulmonar, setPulmonar] = useState(false)
+  const [piel, setPiel] = useState(false);
+  const [cabeza, setCabeza] = useState(false);
+  const [ojos, setOjos] = useState(false);
+  const [oidos, setOidos] = useState(false);
+  const [nariz, setNariz] = useState(false);
+  const [boca, setBoca] = useState(false);
+  const [cuello, setCuello] = useState(false);
+  const [torax, setTorax] = useState(false);
+  const [areaCardiaca, setAreaCardiaca] = useState(false);
+  const [pulmonar, setPulmonar] = useState(false);
 
   // nombre medico
-  const [nombreMedico, setNombreMedico] = useState("")
+  const [nombreMedico, setNombreMedico] = useState("");
 
-  const handleClickCalcularIMC = () => {
+  const handleClickCalcularIMC = (e) => {
     // e.preventDefault()
-
-    Promise.all([
+    /* Promise.all([
       setImc(calcularIMC(altura, peso)),
       setRango(calcularRango(imc, edad)),
       setColor(definirColor(rango)),
-    ]).then(swalIMC(imc, color))
-  }
+    ]).then(swalIMC(imc, color)) */
+  };
 
-  if (calcularIsClicked) {
+  /* if (calcularIsClicked) {
     Promise.all([
       setImc(calcularIMC(altura, peso)),
       setRango(calcularRango(imc, edad)),
       setColor(definirColor(rango)),
     ]).then(swalIMC(imc, color))
     setCalcularIsClicked(false)
-  }
+  } */
 
   const handleSubmitHistoriaClinica = (e) => {
-    e.preventDefault()
-    swalSuccess("Historia agregada correctamente")
-  }
+    e.preventDefault();
+    swalSuccess("Historia agregada correctamente");
+  };
 
   return (
     <>
@@ -136,7 +131,7 @@ const FormHistoriaClinica = () => {
               id="inputHistoriaClinicaAltura"
               value={altura}
               onChange={(e) => {
-                setAltura(e.target.value)
+                setAltura(e.target.value);
               }}
             />
           </div>
@@ -154,7 +149,7 @@ const FormHistoriaClinica = () => {
               id="inputHistoriaClinicaPeso"
               value={peso}
               onChange={(e) => {
-                setPeso(e.target.value)
+                setPeso(e.target.value);
               }}
             />
           </div>
@@ -173,11 +168,9 @@ const FormHistoriaClinica = () => {
             <button
               className="btn fs-5 boton-login text"
               onClick={(e) => {
-                e.preventDefault()
-                setCalcularIsClicked(true)
+                e.preventDefault();
                 setImc(calcularIMC(altura, peso))
-                setRango(calcularRango(imc, edad))
-                setColor(definirColor(rango))
+                calculoFinal(altura, peso, edad)
               }}
             >
               Calcular IMC
@@ -202,7 +195,7 @@ const FormHistoriaClinica = () => {
               id="inputHistoriaClinicaPadecimientos"
               value={padecimientos}
               onChange={(e) => {
-                setPadecimientos(e.target.value)
+                setPadecimientos(e.target.value);
               }}
             ></textarea>
           </div>
@@ -219,7 +212,7 @@ const FormHistoriaClinica = () => {
               id="inputHistoriaClinicaDiagnosticoPrevio"
               value={diagnosticoPrevio}
               onChange={(e) => {
-                setDiagnosticoPrevio(e.target.value)
+                setDiagnosticoPrevio(e.target.value);
               }}
             ></textarea>
           </div>
@@ -238,7 +231,7 @@ const FormHistoriaClinica = () => {
               rows="10"
               value={estudioPrevio}
               onChange={(e) => {
-                setEstudioPrevio(e.target.value)
+                setEstudioPrevio(e.target.value);
               }}
             ></textarea>
           </div>
@@ -257,7 +250,7 @@ const FormHistoriaClinica = () => {
               rows="10"
               value={terapeutaPrevia}
               onChange={(e) => {
-                setTerapeutaPrevia(e.target.value)
+                setTerapeutaPrevia(e.target.value);
               }}
             ></textarea>
           </div>
@@ -275,7 +268,7 @@ const FormHistoriaClinica = () => {
               className="form-check-input ms-1 me-1 text fs-4"
               vale={pechoMaterno}
               onChange={() => {
-                setPechoMaterno(!pechoMaterno)
+                setPechoMaterno(!pechoMaterno);
               }}
             />
             <label
@@ -300,7 +293,7 @@ const FormHistoriaClinica = () => {
               disabled={!pechoMaterno}
               value={duracion}
               onChange={(e) => {
-                setDuracion(e.target.value)
+                setDuracion(e.target.value);
               }}
             />
           </div>
@@ -319,7 +312,7 @@ const FormHistoriaClinica = () => {
               disabled={!pechoMaterno}
               value={ablactacion}
               onChange={(e) => {
-                setAblactacion(e.target.value)
+                setAblactacion(e.target.value);
               }}
             />
           </div>
@@ -338,7 +331,7 @@ const FormHistoriaClinica = () => {
               disabled={!pechoMaterno}
               value={destete}
               onChange={(e) => {
-                setDestete(e.target.value)
+                setDestete(e.target.value);
               }}
             />
           </div>
@@ -356,7 +349,7 @@ const FormHistoriaClinica = () => {
               className="form-check-input ms-1 me-1 text fs-4 "
               value={carne}
               onChange={(e) => {
-                setCarne(e.target.value)
+                setCarne(e.target.value);
               }}
             />
             <label
@@ -374,7 +367,7 @@ const FormHistoriaClinica = () => {
               className="form-check-input ms-1 me-1 text fs-4 "
               value={leche}
               onChange={(e) => {
-                setLeche(e.target.value)
+                setLeche(e.target.value);
               }}
             />
             <label
@@ -392,7 +385,7 @@ const FormHistoriaClinica = () => {
               className="form-check-input ms-1 me-1 text fs-4 "
               value={frutas}
               onChange={(e) => {
-                setFrutas(e.target.value)
+                setFrutas(e.target.value);
               }}
             />
             <label
@@ -410,7 +403,7 @@ const FormHistoriaClinica = () => {
               className="form-check-input ms-1 me-1 text fs-4 "
               value={cereales}
               onChange={(e) => {
-                setCereales(e.target.value)
+                setCereales(e.target.value);
               }}
             />
             <label
@@ -428,7 +421,7 @@ const FormHistoriaClinica = () => {
               className="form-check-input ms-1 me-1 text fs-4 "
               value={legumbres}
               onChange={(e) => {
-                setLegumbres(e.target.value)
+                setLegumbres(e.target.value);
               }}
             />
             <label
@@ -454,7 +447,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={poliomelitis}
                   onChange={(e) => {
-                    setPoliomelitis(e.target.value)
+                    setPoliomelitis(e.target.value);
                   }}
                 />
                 <label
@@ -472,7 +465,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={rotavirus}
                   onChange={(e) => {
-                    setRotavirus(e.target.value)
+                    setRotavirus(e.target.value);
                   }}
                 />
                 <label
@@ -490,7 +483,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={dpto}
                   onChange={(e) => {
-                    setDpto(e.target.value)
+                    setDpto(e.target.value);
                   }}
                 />
                 <label
@@ -508,7 +501,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={influenza}
                   onChange={(e) => {
-                    setInfluenza(e.target.value)
+                    setInfluenza(e.target.value);
                   }}
                 />
                 <label
@@ -528,7 +521,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={sarampion}
                   onChange={(e) => {
-                    setSarampion(e.target.value)
+                    setSarampion(e.target.value);
                   }}
                 />
                 <label
@@ -546,7 +539,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={epatitisB}
                   onChange={(e) => {
-                    setEpatitisB(e.target.value)
+                    setEpatitisB(e.target.value);
                   }}
                 />
                 <label
@@ -564,7 +557,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={rubeola}
                   onChange={(e) => {
-                    setRubeola(e.target.value)
+                    setRubeola(e.target.value);
                   }}
                 />
                 <label
@@ -582,7 +575,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={neumococo}
                   onChange={(e) => {
-                    setNeumococo(e.target.value)
+                    setNeumococo(e.target.value);
                   }}
                 />
                 <label
@@ -602,7 +595,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={parotiditis}
                   onChange={(e) => {
-                    setParotiditis(e.target.value)
+                    setParotiditis(e.target.value);
                   }}
                 />
                 <label
@@ -620,7 +613,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={bgc}
                   onChange={(e) => {
-                    setBgc(e.target.value)
+                    setBgc(e.target.value);
                   }}
                 />
                 <label
@@ -638,7 +631,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={varicela}
                   onChange={(e) => {
-                    setVaricela(e.target.value)
+                    setVaricela(e.target.value);
                   }}
                 />
                 <label
@@ -656,7 +649,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={tixoide}
                   onChange={(e) => {
-                    setTixoide(e.target.value)
+                    setTixoide(e.target.value);
                   }}
                 />
                 <label
@@ -676,7 +669,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={hepatitis}
                   onChange={(e) => {
-                    setHepatitis(e.target.value)
+                    setHepatitis(e.target.value);
                   }}
                 />
                 <label
@@ -694,7 +687,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={A1}
                   onChange={(e) => {
-                    setA1(e.target.value)
+                    setA1(e.target.value);
                   }}
                 />
                 <label
@@ -712,7 +705,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={papiloma}
                   onChange={(e) => {
-                    setPapiloma(e.target.value)
+                    setPapiloma(e.target.value);
                   }}
                 />
                 <label
@@ -738,7 +731,7 @@ const FormHistoriaClinica = () => {
               className="form-control"
               value={sueros}
               onChange={(e) => {
-                setSueros(e.target.value)
+                setSueros(e.target.value);
               }}
             />
           </div>
@@ -762,7 +755,7 @@ const FormHistoriaClinica = () => {
               className="form-control"
               value={datosAnormales}
               onChange={(e) => {
-                setDatosAnormales(e.target.value)
+                setDatosAnormales(e.target.value);
               }}
             ></textarea>
           </div>
@@ -780,7 +773,7 @@ const FormHistoriaClinica = () => {
               className="form-control"
               value={alteracionesLenguaje}
               onChange={(e) => {
-                setAlteracionesLenguaje(e.target.value)
+                setAlteracionesLenguaje(e.target.value);
               }}
             ></textarea>
           </div>
@@ -800,7 +793,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={infecciones}
                   onChange={(e) => {
-                    setInfecciones(e.target.value)
+                    setInfecciones(e.target.value);
                   }}
                 />
                 <label
@@ -818,7 +811,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={alergicos}
                   onChange={(e) => {
-                    setAlergicos(e.target.value)
+                    setAlergicos(e.target.value);
                   }}
                 />
                 <label
@@ -836,7 +829,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={traumatismoicos}
                   onChange={(e) => {
-                    setTraumatismoicos(e.target.value)
+                    setTraumatismoicos(e.target.value);
                   }}
                 />
                 <label
@@ -856,7 +849,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={transfuciones}
                   onChange={(e) => {
-                    setTransfuciones(e.target.value)
+                    setTransfuciones(e.target.value);
                   }}
                 />
                 <label
@@ -874,7 +867,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={quirurgicos}
                   onChange={(e) => {
-                    setQuirurgicos(e.target.value)
+                    setQuirurgicos(e.target.value);
                   }}
                 />
                 <label
@@ -892,7 +885,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={hospitalizacion}
                   onChange={(e) => {
-                    setHospitalizacion(e.target.value)
+                    setHospitalizacion(e.target.value);
                   }}
                 />
                 <label
@@ -923,7 +916,7 @@ const FormHistoriaClinica = () => {
                 className="form-control"
                 value={perimetroCefalico}
                 onChange={(e) => {
-                  setPerimetroCefalico(e.target.value)
+                  setPerimetroCefalico(e.target.value);
                 }}
               />
             </div>
@@ -941,7 +934,7 @@ const FormHistoriaClinica = () => {
                 className="form-control"
                 value={perimetroEmbarazo}
                 onChange={(e) => {
-                  setPerimetroEmbarazo(e.target.value)
+                  setPerimetroEmbarazo(e.target.value);
                 }}
               />
             </div>
@@ -959,7 +952,7 @@ const FormHistoriaClinica = () => {
                 className="form-control"
                 value={perimetroPierna}
                 onChange={(e) => {
-                  setPerimetroPierna(e.target.value)
+                  setPerimetroPierna(e.target.value);
                 }}
               />
             </div>
@@ -977,7 +970,7 @@ const FormHistoriaClinica = () => {
                 className="form-control"
                 value={segmentoSuperior}
                 onChange={(e) => {
-                  setSegmentoSuperior(e.target.value)
+                  setSegmentoSuperior(e.target.value);
                 }}
               />
             </div>
@@ -995,7 +988,7 @@ const FormHistoriaClinica = () => {
                 className="form-control"
                 value={segmentoInferior}
                 onChange={(e) => {
-                  setSegmentoInferior(e.target.value)
+                  setSegmentoInferior(e.target.value);
                 }}
               />
             </div>
@@ -1013,7 +1006,7 @@ const FormHistoriaClinica = () => {
                 className="form-control"
                 value={tensionArterial}
                 onChange={(e) => {
-                  setTensionArterial(e.target.value)
+                  setTensionArterial(e.target.value);
                 }}
               />
             </div>
@@ -1031,7 +1024,7 @@ const FormHistoriaClinica = () => {
                 className="form-control"
                 value={frecuenciaCardiaca}
                 onChange={(e) => {
-                  setFrecuenciaCardiaca(e.target.value)
+                  setFrecuenciaCardiaca(e.target.value);
                 }}
               />
             </div>
@@ -1049,7 +1042,7 @@ const FormHistoriaClinica = () => {
                 className="form-control"
                 value={frecuenciaRespiratoria}
                 onChange={(e) => {
-                  setFrecuenciaRespiratoria(e.target.value)
+                  setFrecuenciaRespiratoria(e.target.value);
                 }}
               />
             </div>
@@ -1067,7 +1060,7 @@ const FormHistoriaClinica = () => {
                 className="form-control"
                 value={temperatura}
                 onChange={(e) => {
-                  setTemperatura(e.target.value)
+                  setTemperatura(e.target.value);
                 }}
               />
             </div>
@@ -1088,7 +1081,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={piel}
                   onChange={(e) => {
-                    setPiel(e.target.value)
+                    setPiel(e.target.value);
                   }}
                 />
                 <label
@@ -1106,7 +1099,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={cabeza}
                   onChange={(e) => {
-                    setCabeza(e.target.value)
+                    setCabeza(e.target.value);
                   }}
                 />
                 <label
@@ -1124,7 +1117,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={ojos}
                   onChange={(e) => {
-                    setOjos(e.target.value)
+                    setOjos(e.target.value);
                   }}
                 />
                 <label
@@ -1142,7 +1135,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={oidos}
                   onChange={(e) => {
-                    setOidos(e.target.value)
+                    setOidos(e.target.value);
                   }}
                 />
                 <label
@@ -1160,7 +1153,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={nariz}
                   onChange={(e) => {
-                    setNariz(e.target.value)
+                    setNariz(e.target.value);
                   }}
                 />
                 <label
@@ -1180,7 +1173,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={boca}
                   onChange={(e) => {
-                    setBoca(e.target.value)
+                    setBoca(e.target.value);
                   }}
                 />
                 <label
@@ -1198,7 +1191,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={cuello}
                   onChange={(e) => {
-                    setCuello(e.target.value)
+                    setCuello(e.target.value);
                   }}
                 />
                 <label
@@ -1216,7 +1209,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={torax}
                   onChange={(e) => {
-                    setTorax(e.target.value)
+                    setTorax(e.target.value);
                   }}
                 />
                 <label
@@ -1234,7 +1227,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={areaCardiaca}
                   onChange={(e) => {
-                    setAreaCardiaca(e.target.value)
+                    setAreaCardiaca(e.target.value);
                   }}
                 />
                 <label
@@ -1252,7 +1245,7 @@ const FormHistoriaClinica = () => {
                   className="form-check-input text fs-4 "
                   value={pulmonar}
                   onChange={(e) => {
-                    setPulmonar(e.target.value)
+                    setPulmonar(e.target.value);
                   }}
                 />
                 <label
@@ -1280,7 +1273,7 @@ const FormHistoriaClinica = () => {
             className="form-control"
             value={nombreMedico}
             onChange={(e) => {
-              setNombreMedico(e.target.value)
+              setNombreMedico(e.target.value);
             }}
           />
         </div>
@@ -1292,7 +1285,7 @@ const FormHistoriaClinica = () => {
         </div>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default FormHistoriaClinica
+export default FormHistoriaClinica;
