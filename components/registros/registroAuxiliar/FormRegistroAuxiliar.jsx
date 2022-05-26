@@ -1,26 +1,28 @@
-import Link from "next/link"
-import React, { useState } from "react"
-import FormRegistroUsuario from "../FormRegistroUsuario"
+import Link from "next/link";
+import React, { useState } from "react";
+import FormRegistroUsuario from "../FormRegistroUsuario";
 
 const FormRegistroAuxiliar = () => {
-  const [AuxiliarNombre, setAuxiliarNombre] = useState("")
-  const [AuxiliarID, setAuxiliarID] = useState("")
-  const [AuxiliarTelefono, setAuxiliarTelefono] = useState("")
-  const [AuxiliarDireccion, setAuxiliarDireccion] = useState("")
-  const [AuxiliarGenero, setAuxiliarGenero] = useState("")
-  const [AuxiliarFechaNacimiento, setAuxiliarFechaNacimiento] = useState("")
+  const [AuxiliarNombre, setAuxiliarNombre] = useState("");
+  const [AuxiliarID, setAuxiliarID] = useState("");
+  const [AuxiliarTelefono, setAuxiliarTelefono] = useState("");
+  const [AuxiliarDireccion, setAuxiliarDireccion] = useState("");
+  const [AuxiliarGenero, setAuxiliarGenero] = useState("");
+  const [AuxiliarFechaNacimiento, setAuxiliarFechaNacimiento] = useState("");
 
-  const [visibleAuxiliar, setVisibleAuxiliar] = useState(true)
-  const [visibleUsuario, setVisibleUsuario] = useState(false)
-  const NORMAL = "row"
-  const HIDDEN = NORMAL + " d-none"
+  const [visibleAuxiliar, setVisibleAuxiliar] = useState(true);
+  const [visibleUsuario, setVisibleUsuario] = useState(false);
+  const NORMAL = "row";
+  const HIDDEN = NORMAL + " d-none";
 
   const handleSubmitAuxiliar = async (e) => {
-    e.preventDefault()
-    const urlAuxiliar = ``
-    const dataAuxiliar = {}
+    e.preventDefault();
+    const dataAuxiliar = {};
+    const restURL = `/persona/auxiliar`;
 
-    await fetch(urlAuxiliar, {
+    const response = postRegistro(dataAuxiliar, restURL);
+
+    /* await fetch(urlAuxiliar, {
       method: "POST",
       body: JSON.stringify(dataAuxiliar),
       headers: {
@@ -30,8 +32,8 @@ const FormRegistroAuxiliar = () => {
     })
       .then((res) => res.json())
       .catch((error) => console.error("Error: ", error))
-      .then((response) => console.log("Succes: ", response))
-  }
+      .then((response) => console.log("Succes: ", response)) */
+  };
 
   return (
     <>
@@ -51,7 +53,7 @@ const FormRegistroAuxiliar = () => {
               name="inputRegistroAuxiliarNombre"
               value={AuxiliarNombre}
               onChange={(e) => {
-                setAuxiliarNombre(e.target.value)
+                setAuxiliarNombre(e.target.value);
               }}
             />
           </div>
@@ -69,7 +71,7 @@ const FormRegistroAuxiliar = () => {
               name="inputAuxiliarRegistroID"
               value={AuxiliarID}
               onChange={(e) => {
-                setAuxiliarID(e.target.value)
+                setAuxiliarID(e.target.value);
               }}
             />
           </div>
@@ -87,7 +89,7 @@ const FormRegistroAuxiliar = () => {
               name="inputRegistroAuxiliarTelefono"
               value={AuxiliarTelefono}
               onChange={(e) => {
-                setAuxiliarTelefono(e.target.value)
+                setAuxiliarTelefono(e.target.value);
               }}
             />
           </div>
@@ -108,7 +110,7 @@ const FormRegistroAuxiliar = () => {
               name="inputRegistroAuxiliarDireccion"
               value={AuxiliarDireccion}
               onChange={(e) => {
-                setAuxiliarDireccion(e.target.value)
+                setAuxiliarDireccion(e.target.value);
               }}
             />
           </div>
@@ -124,7 +126,7 @@ const FormRegistroAuxiliar = () => {
               id="inputRegistroAuxiliarGenero"
               value={AuxiliarGenero}
               onChange={(e) => {
-                setAuxiliarGenero(e.target.value)
+                setAuxiliarGenero(e.target.value);
               }}
             >
               <option className="text fs-4" value="otro">
@@ -152,7 +154,7 @@ const FormRegistroAuxiliar = () => {
               name="inputRegistroAuxiliarFechaNacimiento"
               value={AuxiliarFechaNacimiento}
               onChange={(e) => {
-                setAuxiliarFechaNacimiento(e.target.value)
+                setAuxiliarFechaNacimiento(e.target.value);
               }}
             />
           </div>
@@ -160,10 +162,10 @@ const FormRegistroAuxiliar = () => {
 
         <button
           onClick={(e) => {
-            e.preventDefault()
-            setVisibleAuxiliar(false)
-            setVisibleUsuario(true)
-            console.log(visibleAuxiliar)
+            e.preventDefault();
+            setVisibleAuxiliar(false);
+            setVisibleUsuario(true);
+            console.log(visibleAuxiliar);
           }}
           type="submit"
           className="btn boton-login mt-3 text fs-5"
@@ -178,7 +180,7 @@ const FormRegistroAuxiliar = () => {
         visible={visibleUsuario}
       />
     </>
-  )
-}
+  );
+};
 
-export default FormRegistroAuxiliar
+export default FormRegistroAuxiliar;

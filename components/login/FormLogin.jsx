@@ -1,28 +1,34 @@
-import Link from "next/link"
-import React, { useState } from "react"
-import { useLocalStorage } from "../utilidades/hooks/useLocalStorage"
-import { swalSuccess, swalError } from "components/utilidades/SweetAlert2/swal"
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import { useLocalStorage } from "../utilidades/hooks/useLocalStorage";
+// import { postLogin } from "../utilidades/axios/AxiosFunctions";
 
 const FormLogin = () => {
-  const [usuarioInput, setUsusarioInput] = useState("")
-  const [contrasenaInput, setContrasenaInput] = useState("")
+  const [usuarioInput, setUsusarioInput] = useState("");
+  const [contrasenaInput, setContrasenaInput] = useState("");
 
-  const [usuario, setUsuario] = useLocalStorage("usuario", "")
-  const [contrasena, setContrasena] = useLocalStorage("contrasena", "")
+  const [usuario, setUsuario] = useLocalStorage("usuario", "");
+  const [contrasena, setContrasena] = useLocalStorage("contrasena", "");
 
-  const handleLogin = (e) => {
-    e.preventDefault()
-    setUsuario(usuarioInput)
-    setContrasena(contrasenaInput)
-    swalSuccess("Sesión iniciada")
-  }
+  const handleSubmitLogin = (e) => {
+    e.preventDefault();
+    setUsuario(usuarioInput);
+    setContrasena(contrasenaInput);
+    const dataLogin = {
+      usernameOrEmail: usuario,
+      password: contrasena,
+    };
+    /* useEffect(() => {
+      postLogin(dataLogin);
+    }, []); */
+  };
 
   return (
     <>
-      <form className="" onSubmit={handleLogin}>
+      <form className="" onSubmit={handleSubmitLogin}>
         <div className="mb-3">
           <label htmlFor="inputloginID" className="form-label text fs-4">
-            Cédula de Ciudadanía o Email
+            Email
           </label>
           <input
             type="text"
@@ -30,9 +36,9 @@ const FormLogin = () => {
             id="inputloginID"
             value={usuarioInput}
             onChange={(e) => {
-              setUsusarioInput(e.target.value)
-              setUsuario(usuarioInput)
-              console.log("usuario: " + usuario)
+              setUsusarioInput(e.target.value);
+              setUsuario(usuarioInput);
+              console.log("usuario: " + usuario);
             }}
           />
         </div>
@@ -46,9 +52,9 @@ const FormLogin = () => {
             id="inputLoginPassword"
             value={contrasenaInput}
             onChange={(e) => {
-              setContrasenaInput(e.target.value)
-              setContrasena(contrasenaInput)
-              console.log("contraseña: " + contrasena)
+              setContrasenaInput(e.target.value);
+              setContrasena(contrasenaInput);
+              console.log("contraseña: " + contrasena);
             }}
           />
         </div>
@@ -65,7 +71,7 @@ const FormLogin = () => {
         </button>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default FormLogin
+export default FormLogin;

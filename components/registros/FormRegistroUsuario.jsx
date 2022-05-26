@@ -1,22 +1,29 @@
-import Link from "next/link"
-import React, { useState } from "react"
+import Link from "next/link";
+import React, { useState } from "react";
+import { postRegistro } from "components/utilidades/axios/AxiosFunctions";
+import { useRouter } from "next/router";
 
 const FormRegistroUsuario = (props) => {
-  const [Email, setEmail] = useState("")
-  const [Password, setPassword] = useState("")
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
 
-  const NORMAL = "row"
-  const HIDDEN = NORMAL + " d-none"
+  const NORMAL = "row";
+  const HIDDEN = NORMAL + " d-none";
+
+  const router = useRouter();
+  const rol = router.query.rol;
 
   const handleSubmitUsuario = async (e) => {
-    e.preventDefault()
-    const urlUsuario = ``
+    e.preventDefault();
     const dataUsuario = {
       email: Email,
       password: Password,
-    }
+    };
+    const restURL = `/personas/${props.id}/usuario/${rol}`;
 
-    await fetch(urlUsuario, {
+    const response = postRegistro(dataUsuario, restURL);
+
+    /* await fetch(urlUsuario, {
       method: "POST",
       body: JSON.stringify(dataUsuario),
       headers: {
@@ -26,8 +33,8 @@ const FormRegistroUsuario = (props) => {
     })
       .then((res) => res.json())
       .catch((error) => console.error("Error: ", error))
-      .then((response) => console.log("Succes: ", response))
-  }
+      .then((response) => console.log("Succes: ", response)) */
+  };
 
   return (
     <>
@@ -43,7 +50,7 @@ const FormRegistroUsuario = (props) => {
             name="inputRegistroEmail"
             value={Email}
             onChange={(e) => {
-              setEmail(e.target.value)
+              setEmail(e.target.value);
             }}
           />
         </div>
@@ -61,7 +68,7 @@ const FormRegistroUsuario = (props) => {
             name="inputRegistroPassword"
             value={Password}
             onChange={(e) => {
-              setPassword(e.target.value)
+              setPassword(e.target.value);
             }}
           />
         </div>
@@ -73,7 +80,7 @@ const FormRegistroUsuario = (props) => {
         </Link>
       </form>
     </>
-  )
-}
+  );
+};
 
-export default FormRegistroUsuario
+export default FormRegistroUsuario;
