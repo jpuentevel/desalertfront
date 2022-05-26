@@ -18,9 +18,9 @@ const FormLogin = () => {
       usernameOrEmail: usuario,
       password: contrasena,
     };
-    /* useEffect(() => {
+    useEffect(() => {
       postLogin(dataLogin);
-    }, []); */
+    }, []);
   };
 
   return (

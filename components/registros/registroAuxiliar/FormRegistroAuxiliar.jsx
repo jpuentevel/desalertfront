@@ -1,6 +1,7 @@
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormRegistroUsuario from "../FormRegistroUsuario";
+import { postRegistro } from "components/utilidades/axios/AxiosFunctions";
 
 const FormRegistroAuxiliar = () => {
   const [AuxiliarNombre, setAuxiliarNombre] = useState("");
@@ -15,12 +16,21 @@ const FormRegistroAuxiliar = () => {
   const NORMAL = "row";
   const HIDDEN = NORMAL + " d-none";
 
-  const handleSubmitAuxiliar = async (e) => {
+  const handleSubmitAuxiliar = (e) => {
     e.preventDefault();
-    const dataAuxiliar = {};
-    const restURL = `/persona/auxiliar`;
+    const dataAuxiliar = {
+      id: AuxiliarID,
+      nombre: AuxiliarNombre,
+      direccion: AuxiliarDireccion,
+      fechaNacimiento: AuxiliarFechaNacimiento,
+      sexo: AuxiliarGenero,
+      telefono: AuxiliarTelefono,
+    };
+    const restURL = `/personas/auxiliar`;
 
-    const response = postRegistro(dataAuxiliar, restURL);
+    let respuesta = postRegistro(dataAuxiliar, restURL);
+
+    console.log("REPUESTA DEL LOGIN: ", respuesta);
 
     /* await fetch(urlAuxiliar, {
       method: "POST",
@@ -37,7 +47,10 @@ const FormRegistroAuxiliar = () => {
 
   return (
     <>
-      <form className={visibleAuxiliar ? NORMAL : HIDDEN}>
+      <form
+        onSubmit={handleSubmitAuxiliar}
+        className={visibleAuxiliar ? NORMAL : HIDDEN}
+      >
         <div className="col col-lg-6 col-sm-12">
           <div className="mb-3">
             <label
@@ -162,10 +175,9 @@ const FormRegistroAuxiliar = () => {
 
         <button
           onClick={(e) => {
-            e.preventDefault();
+            // e.preventDefault();
             setVisibleAuxiliar(false);
             setVisibleUsuario(true);
-            console.log(visibleAuxiliar);
           }}
           type="submit"
           className="btn boton-login mt-3 text fs-5"

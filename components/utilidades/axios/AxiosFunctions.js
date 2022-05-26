@@ -2,12 +2,43 @@ import React, { useState } from "react";
 import { swalSuccess, swalError } from "../SweetAlert2/swal";
 const axios = require("axios");
 
-const baseURL = "";
+const baseURL = "http://localhost/api";
 
 const postRegistro = async (data, restURL) => {
+  let respuesta = false;
+  /* const config = {
+    url: baseURL + restURL,
+    method: "post",
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers":
+        "POST, GET, PUT, DELETE, OPTIONS, HEAD, Authorization, Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Access-Control-Allow-Origin",
+      "Content-Type": "application/json",
+    },
+  }; */
   await axios({
     method: "post",
     url: baseURL + restURL,
+    data: data,
+  })
+    .then((response) => {
+      swalSuccess("Registro exitoso");
+      respuesta = true;
+      console.log(response);
+    })
+    .catch((error) => {
+      swalError("Error al registrar");
+      respuesta = false;
+      console.log(error);
+    });
+
+  return respuesta;
+};
+
+const postLogin = async () => {
+  await axios({
+    method: "post",
+    url: baseURL + `/auth/iniciarSesion`,
     data: data,
   })
     .then((response) => {
