@@ -18,14 +18,15 @@ const FormRegistroAuxiliar = () => {
 
   const handleSubmitAuxiliar = (e) => {
     e.preventDefault();
-    const dataAuxiliar = {
+    const dataAuxiliar = JSON.stringify({
       id: AuxiliarID,
       nombre: AuxiliarNombre,
       direccion: AuxiliarDireccion,
       fechaNacimiento: AuxiliarFechaNacimiento,
       sexo: AuxiliarGenero,
       telefono: AuxiliarTelefono,
-    };
+      cargo: "auxiliar",
+    });
     const restURL = `/personas/auxiliar`;
 
     postRegistro(dataAuxiliar, restURL);

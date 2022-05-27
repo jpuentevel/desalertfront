@@ -2,11 +2,18 @@ import React, { useState } from "react";
 import { swalSuccess, swalError } from "../SweetAlert2/swal";
 const axios = require("axios");
 
-const baseURL = "http://localhost/api";
+const baseURL = "https://hero-desalert-api.herokuapp.com/api";
+
+/* apiInstance = axios.create({ baseURL: baseURL });
+
+apiInstance.interceptors.request.use(
+    (request) => {
+        request.token["1"]
+    },
+    (err) => err
+); */
 
 const postRegistro = (data, restURL) => {
-  let respuesta = false;
-
   axios({
     method: "post",
     url: baseURL + restURL,
@@ -17,30 +24,40 @@ const postRegistro = (data, restURL) => {
   })
     .then((response) => {
       swalSuccess("Registro exitoso");
-      respuesta = true;
       console.log(response);
     })
     .catch((error) => {
       swalError("Error al registrar");
-      respuesta = false;
-      console.log(error);
+      console.log(error.response.data);
     });
-
-  return respuesta;
 };
 
-const postLogin = async () => {
-  await axios({
+const postLogin = (data) => {
+
+  axios({
     method: "post",
     url: baseURL + `/auth/iniciarSesion`,
+    headers: {
+      "Content-Type": "application/json",
+    },
     data: data,
   })
     .then((response) => {
-      swalSuccess("Registro exitoso");
-      console.log(response);
+      swalSuccess("Inicio de sesión exitoso");
+      console.log("RESPUESTA LOGIN", response);
+      const token = response.data.token;
+      console.log("RESPUESTA TOKEN: ", token);
+      const { usuario, contrasena } = data;
+      const user = {
+          correo: usuario,
+          contrasena: contrasena,
+          token: token,
+      }
+
+      return user;
     })
     .catch((error) => {
-      swalError("Error al registrar");
+      swalError("Error al iniciar sesión");
       console.log(error);
     });
 };
@@ -122,6 +139,7 @@ const getAcudiente = async () => {
 
 export {
   postRegistro,
+  postLogin,
   getInfante,
   getInfantes,
   getMedico,

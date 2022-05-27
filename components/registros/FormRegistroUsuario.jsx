@@ -10,6 +10,8 @@ const FormRegistroUsuario = (props) => {
   const NORMAL = "row";
   const HIDDEN = NORMAL + " d-none";
 
+  const [disable, setDisable] = useState(true)
+
   const router = useRouter();
   const rol = router.query.rol;
 
@@ -22,13 +24,16 @@ const FormRegistroUsuario = (props) => {
 
   const handleSubmitUsuario = async (e) => {
     e.preventDefault();
-    const dataUsuario = {
+    const dataUsuario = JSON.stringify({
       email: Email,
-      password: Password,
-    };
+      contrasena: Password,
+    });
+
     const restURL = `/personas/${props.id}/usuario/${rolTabla}`;
 
     postRegistro(dataUsuario, restURL);
+
+    setDisable(false)
   };
 
   return (
@@ -71,9 +76,23 @@ const FormRegistroUsuario = (props) => {
           />
         </div>
 
-        <button type="submit" className="btn boton-login mt-3 text fs-5">
+        <button
+          type="submit"
+          className="btn boton-login mt-3 text fs-5"
+          disabled={!disable}
+        >
           Registrarse
         </button>
+
+        <Link href="/login">
+          <button
+            type="button"
+            className="btn boton-login mt-3 text fs-5"
+            disabled={disable}
+          >
+            Ir al login
+          </button>
+        </Link>
       </form>
     </>
   );
