@@ -13,32 +13,30 @@ const FormRegistroUsuario = (props) => {
   const router = useRouter();
   const rol = router.query.rol;
 
+  let rolTabla = "error";
+  if (rol == "medico" || rol == "auxiliar") {
+    rolTabla = "ROLE_ADMIN";
+  } else if (rol == "acudiente") {
+    rolTabla = "ROLE_USER";
+  }
+
   const handleSubmitUsuario = async (e) => {
     e.preventDefault();
     const dataUsuario = {
       email: Email,
       password: Password,
     };
-    const restURL = `/personas/${props.id}/usuario/${rol}`;
+    const restURL = `/personas/${props.id}/usuario/${rolTabla}`;
 
-    const response = postRegistro(dataUsuario, restURL);
-
-    /* await fetch(urlUsuario, {
-      method: "POST",
-      body: JSON.stringify(dataUsuario),
-      headers: {
-        Accept: "application.json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .catch((error) => console.error("Error: ", error))
-      .then((response) => console.log("Succes: ", response)) */
+    postRegistro(dataUsuario, restURL);
   };
 
   return (
     <>
-      <form className={props.visible ? NORMAL : HIDDEN}>
+      <form
+        onSubmit={handleSubmitUsuario}
+        className={props.visible ? NORMAL : HIDDEN}
+      >
         <div className="mb-3">
           <label htmlFor="inputRegistroEmail" className="form-label text fs-4">
             Email
@@ -73,11 +71,9 @@ const FormRegistroUsuario = (props) => {
           />
         </div>
 
-        <Link href="/home/[rolHome]" as={`/home/${props.rol}`} passHref>
-          <button type="submit" className="btn boton-login mt-3 text fs-5">
-            Registrarse
-          </button>
-        </Link>
+        <button type="submit" className="btn boton-login mt-3 text fs-5">
+          Registrarse
+        </button>
       </form>
     </>
   );

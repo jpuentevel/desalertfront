@@ -28,21 +28,7 @@ const FormRegistroAuxiliar = () => {
     };
     const restURL = `/personas/auxiliar`;
 
-    let respuesta = postRegistro(dataAuxiliar, restURL);
-
-    console.log("REPUESTA DEL LOGIN: ", respuesta);
-
-    /* await fetch(urlAuxiliar, {
-      method: "POST",
-      body: JSON.stringify(dataAuxiliar),
-      headers: {
-        Accept: "application.json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .catch((error) => console.error("Error: ", error))
-      .then((response) => console.log("Succes: ", response)) */
+    postRegistro(dataAuxiliar, restURL);
   };
 
   return (
