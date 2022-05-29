@@ -1,25 +1,51 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { swalSuccess, swalError } from "components/utilidades/SweetAlert2/swal";
 import { useLocalStorage } from "../utilidades/hooks/useLocalStorage";
- import { postLogin } from "../utilidades/axios/AxiosFunctions";
+import { login } from "services/loginService";
+import { postLogin } from "../utilidades/axios/AxiosFunctions";
 
 const FormLogin = () => {
   const [usuarioInput, setUsusarioInput] = useState("");
   const [contrasenaInput, setContrasenaInput] = useState("");
 
-  const [usuario, setUsuario] = useLocalStorage("usuario", "");
-  const [contrasena, setContrasena] = useLocalStorage("contrasena", "");
+  // const [user, setUser] = useLocalStorage("usuario", "");
 
-  const handleSubmitLogin = (e) => {
+  const [user, setUser] = useState({
+    email: "",
+    contrasena: "",
+    token: "",
+  });
+
+  const handleSubmitLogin = async (e) => {
     e.preventDefault();
-    setUsuario(usuarioInput);
-    setContrasena(contrasenaInput);
     const dataLogin = {
-      usernameOrEmail: usuario,
-      password: contrasena,
+      usernameOrEmail: usuarioInput,
+      password: contrasenaInput,
     };
 
-    postLogin(dataLogin);
+    try {
+      const token = await login(dataLogin);
+      swalSuccess("Sesión iniciada");
+      const userData = {
+        email: dataLogin.usernameOrEmail,
+        contrasena: dataLogin.password,
+        token: token,
+      };
+      console.log("USER DATA: ", userData);
+      /* setUser({
+        ...user,
+        email: dataLogin.usernameOrEmail,
+        contrasena: dataLogin.password,
+        token: token,
+      });
+      console.log("USER: ", user); */
+      setUsusarioInput("");
+      setContrasenaInput("");
+    } catch (error) {
+      console.log(error);
+      swalError(error);
+    }
   };
 
   return (
@@ -36,8 +62,6 @@ const FormLogin = () => {
             value={usuarioInput}
             onChange={(e) => {
               setUsusarioInput(e.target.value);
-              setUsuario(usuarioInput);
-              console.log("usuario: " + usuario);
             }}
           />
         </div>
@@ -52,8 +76,6 @@ const FormLogin = () => {
             value={contrasenaInput}
             onChange={(e) => {
               setContrasenaInput(e.target.value);
-              setContrasena(contrasenaInput);
-              console.log("contraseña: " + contrasena);
             }}
           />
         </div>
