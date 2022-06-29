@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { postRegistro } from "components/utilidades/axios/AxiosFunctions";
+import { registro } from "services/registroService";
 import { useRouter } from "next/router";
+import { swalError, swalSuccess } from "components/utilidades/SweetAlert2/swal";
 
 const FormRegistroUsuario = (props) => {
   const [Email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const FormRegistroUsuario = (props) => {
   const NORMAL = "row";
   const HIDDEN = NORMAL + " d-none";
 
-  const [disable, setDisable] = useState(true)
+  const [disable, setDisable] = useState(true);
 
   const router = useRouter();
   const rol = router.query.rol;
@@ -29,11 +30,17 @@ const FormRegistroUsuario = (props) => {
       contrasena: Password,
     });
 
-    const restURL = `/personas/${props.id}/usuario/${rolTabla}`;
+    const restURL = `${props.id}/usuario/${rolTabla}`;
 
-    postRegistro(dataUsuario, restURL);
-
-    setDisable(false)
+    try {
+      const response = await registro(restURL, dataUsuario);
+      swalSuccess("Registro exitoso");
+      console.log("RESPUESTA usuario: ", response);
+      setDisable(false);
+    } catch (error) {
+      console.log(error);
+      swalError("Error");
+    }
   };
 
   return (

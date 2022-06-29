@@ -9,14 +9,6 @@ const FormLogin = () => {
   const [usuarioInput, setUsusarioInput] = useState("");
   const [contrasenaInput, setContrasenaInput] = useState("");
 
-  // const [user, setUser] = useLocalStorage("usuario", "");
-
-  const [user, setUser] = useState({
-    email: "",
-    contrasena: "",
-    token: "",
-  });
-
   const handleSubmitLogin = async (e) => {
     e.preventDefault();
     const dataLogin = {
@@ -33,13 +25,6 @@ const FormLogin = () => {
         token: token,
       };
       console.log("USER DATA: ", userData);
-      /* setUser({
-        ...user,
-        email: dataLogin.usernameOrEmail,
-        contrasena: dataLogin.password,
-        token: token,
-      });
-      console.log("USER: ", user); */
       setUsusarioInput("");
       setContrasenaInput("");
     } catch (error) {

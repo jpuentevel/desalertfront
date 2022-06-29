@@ -28,7 +28,7 @@ const postRegistro = (data, restURL) => {
     })
     .catch((error) => {
       swalError("Error al registrar");
-      console.log(error.response.data);
+      console.log(error);
     });
 };
 

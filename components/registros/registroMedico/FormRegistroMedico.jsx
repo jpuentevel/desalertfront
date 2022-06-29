@@ -1,7 +1,9 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import FormRegistroUsuario from "../FormRegistroUsuario";
+import { registro } from "services/registroService";
 import { postRegistro } from "components/utilidades/axios/AxiosFunctions";
+import { swalError, swalSuccess } from "components/utilidades/SweetAlert2/swal";
 
 const FormRegistroMedico = () => {
   const [MedicoNombre, setMedicoNombre] = useState("");
@@ -17,7 +19,7 @@ const FormRegistroMedico = () => {
   const NORMAL = "row";
   const HIDDEN = NORMAL + " d-none";
 
-  const handleSubmitMedico = (e) => {
+  const handleSubmitMedico = async (e) => {
     e.preventDefault();
     const dataMedico = JSON.stringify({
       id: MedicoID,
@@ -29,9 +31,18 @@ const FormRegistroMedico = () => {
       cargo: "medico",
       especialidad: MedicoEspecialidad,
     });
-    const restURL = `/personas/medicos`;
+    const restURL = `medicos`;
 
-    postRegistro(dataMedico, restURL);
+    // const response = await postRegistro(restURL, dataMedico);
+
+    try {
+      const response = await registro(restURL, dataMedico);
+      console.log(`RESPUESTA ${dataMedico.cargo}: `, response);
+      swalSuccess("Primera partes correcta");
+    } catch (error) {
+      console.log(error);
+      swalError("Error");
+    }
   };
 
   return (
