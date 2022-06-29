@@ -1,9 +1,7 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { swalSuccess, swalError } from "components/utilidades/SweetAlert2/swal";
-import { useLocalStorage } from "../utilidades/hooks/useLocalStorage";
 import { login } from "services/loginService";
-import { postLogin } from "../utilidades/axios/AxiosFunctions";
 
 const FormLogin = () => {
   const [usuarioInput, setUsusarioInput] = useState("");
@@ -25,6 +23,7 @@ const FormLogin = () => {
         token: token,
       };
       console.log("USER DATA: ", userData);
+      localStorage.setItem("user", JSON.stringify(userData));
       setUsusarioInput("");
       setContrasenaInput("");
     } catch (error) {

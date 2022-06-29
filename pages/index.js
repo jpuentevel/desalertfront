@@ -3,6 +3,10 @@ import OpcionesPresentacion from "../components/presentation/OpcionesPresentacio
 
 export default function Home() {
 
+  if (typeof window !== 'undefined') {
+    console.log(JSON.parse(localStorage.getItem("user")));
+  }
+
   return (
     <>
       <div>

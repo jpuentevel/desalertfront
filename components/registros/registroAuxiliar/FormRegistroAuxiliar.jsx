@@ -1,7 +1,8 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import FormRegistroUsuario from "../FormRegistroUsuario";
-import { postRegistro } from "components/utilidades/axios/AxiosFunctions";
+import { registro } from "services/registroService";
+import { swalError, swalSuccess } from "components/utilidades/SweetAlert2/swal";
 
 const FormRegistroAuxiliar = () => {
   const [AuxiliarNombre, setAuxiliarNombre] = useState("");
@@ -16,7 +17,7 @@ const FormRegistroAuxiliar = () => {
   const NORMAL = "row";
   const HIDDEN = NORMAL + " d-none";
 
-  const handleSubmitAuxiliar = (e) => {
+  const handleSubmitAuxiliar = async (e) => {
     e.preventDefault();
     const dataAuxiliar = JSON.stringify({
       id: AuxiliarID,
@@ -27,9 +28,16 @@ const FormRegistroAuxiliar = () => {
       telefono: AuxiliarTelefono,
       cargo: "auxiliar",
     });
-    const restURL = `/personas/auxiliar`;
+    const restURL = `auxiliar`;
 
-    postRegistro(dataAuxiliar, restURL);
+    try {
+      const response = await registro(restURL, dataAuxiliar);
+      console.log("Respuesta auxiliar", response);
+      swalSuccess("Primera parte correcta");
+    } catch (error) {
+      console.log(error);
+      swalError("Error");
+    }
   };
 
   return (

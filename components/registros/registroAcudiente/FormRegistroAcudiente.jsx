@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import FormRegistroUsuario from "../FormRegistroUsuario";
 import { postRegistro } from "components/utilidades/axios/AxiosFunctions";
+import { registro } from "services/registroService";
+import { swalError, swalSuccess } from "components/utilidades/SweetAlert2/swal";
 
 const FormRegistroAcudiente = () => {
   const [AcudienteNombre, setAcudienteNombre] = useState("");
@@ -29,14 +31,24 @@ const FormRegistroAcudiente = () => {
       cargo: "acudiente",
     });
 
-    const restURL = `/personas/acudiente`;
+    const restURL = `acudiente`;
 
-    postRegistro(dataAcudiente, restURL);
+    try {
+      const response = await registro(restURL, dataAcudiente);
+      console.log("Respuesta acudiente", response);
+      swalSuccess("Primera parte correcta");
+    } catch (error) {
+      console.log(error);
+      swalError("Error");
+    }
   };
 
   return (
     <>
-      <form onSubmit={handleSubmitAcudiente} className={visibleAcudiente ? NORMAL : HIDDEN}>
+      <form
+        onSubmit={handleSubmitAcudiente}
+        className={visibleAcudiente ? NORMAL : HIDDEN}
+      >
         <div className="col col-lg-6 col-sm-12">
           <div className="mb-3">
             <label

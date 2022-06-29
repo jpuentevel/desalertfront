@@ -37,8 +37,8 @@ const FormRegistroMedico = () => {
 
     try {
       const response = await registro(restURL, dataMedico);
-      console.log(`RESPUESTA ${dataMedico.cargo}: `, response);
-      swalSuccess("Primera partes correcta");
+      console.log("Respuesta medico", response);
+      swalSuccess("Primera parte correcta");
     } catch (error) {
       console.log(error);
       swalError("Error");
